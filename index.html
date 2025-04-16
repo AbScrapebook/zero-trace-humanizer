@@ -1,31 +1,92 @@
-<script>
-function humanize() {
-  const input = document.getElementById("input").value;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ZeroTrace Humanizer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      max-width: 800px;
+      margin: auto;
+      background-color: #f9f9f9;
+    }
+    h1 {
+      text-align: center;
+    }
+    textarea, button {
+      width: 100%;
+      margin-top: 10px;
+      padding: 10px;
+      font-size: 16px;
+    }
+    button {
+      background: black;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    #output {
+      margin-top: 20px;
+      background: #f1f1f1;
+      padding: 15px;
+      border-radius: 5px;
+      white-space: pre-wrap;
+    }
+    #copyBtn {
+      margin-top: 10px;
+      padding: 8px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>ZeroTrace Humanizer</h1>
+  <p>Paste your AI-generated text below and click “Humanize” to get natural, undetectable output.</p>
 
-  // Basic transformations
-  let output = input
-    .replace(/\bMoreover\b/gi, "Also")
-    .replace(/\bTherefore\b/gi, "So")
-    .replace(/\bUtilize\b/gi, "Use")
-    .replace(/\bIn order to\b/gi, "To")
-    .replace(/\bHowever\b/gi, "But")
-    .replace(/\bArtificial intelligence\b/gi, "Smart technology")
-    .replace(/\bapplications\b/gi, "uses")
-    .replace(/\bspan across\b/gi, "are used in")
-    .replace(/\bremain competitive\b/gi, "stay ahead in the game")
-    .replace(/\bleverage\b/gi, "take advantage of")
-    .replace(/\bbeneficial\b/gi, "helpful")
-    .replace(/\bessential\b/gi, "really important");
+  <textarea id="input" rows="8" placeholder="Paste AI-generated text here..."></textarea>
+  <button onclick="humanize()">Humanize Text</button>
 
-  // Sentence-level tweaks
-  output = output
-    .replace(/\. /g, ".\n") // Line breaks for human flow
-    .replace(/\bTo /g, "To really ") // Slight modifier
-    .replace(/must/g, "should definitely") // Softer tone
-    .replace(/integrating/g, "bringing in")
-    .replace(/daily operations/g, "everyday work")
-    .replace(/it’s/g, "it's actually");
+  <div id="output"></div>
+  <button id="copyBtn" onclick="copyText()">📋 Copy Output</button>
 
-  document.getElementById("output").innerText = output;
-}
-</script>
+  <script>
+    function humanize() {
+      const input = document.getElementById("input").value;
+
+      let output = input
+        .replace(/\bMoreover\b/gi, "Also")
+        .replace(/\bTherefore\b/gi, "So")
+        .replace(/\bUtilize\b/gi, "Use")
+        .replace(/\bIn order to\b/gi, "To")
+        .replace(/\bHowever\b/gi, "But")
+        .replace(/\bArtificial intelligence\b/gi, "Smart technology")
+        .replace(/\bapplications\b/gi, "uses")
+        .replace(/\bspan across\b/gi, "are used in")
+        .replace(/\bremain competitive\b/gi, "stay ahead in the game")
+        .replace(/\bleverage\b/gi, "take advantage of")
+        .replace(/\bbeneficial\b/gi, "helpful")
+        .replace(/\bessential\b/gi, "really important")
+        .replace(/\. /g, ".\n")
+        .replace(/\bTo /g, "To really ")
+        .replace(/must/g, "should definitely")
+        .replace(/integrating/g, "bringing in")
+        .replace(/daily operations/g, "everyday work")
+        .replace(/it’s/g, "it's actually");
+
+      document.getElementById("output").innerText = output;
+    }
+
+    function copyText() {
+      const text = document.getElementById("output").innerText;
+      navigator.clipboard.writeText(text)
+        .then(() => alert("Output copied!"))
+        .catch(err => alert("Failed to copy text."));
+    }
+  </script>
+</body>
+</html>
